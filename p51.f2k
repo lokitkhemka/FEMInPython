@@ -43,10 +43,16 @@ PROGRAM p51
  OPEN(10,FILE=argv(1:nlen)//'.dat') 
  !Open file for writing results
  OPEN(11,FILE=argv(1:nlen)//'.res')
+ !Read and store the variables from the data file
  READ(10,*)type_2d,element,nod,dir,nxe,nye,nip,np_types
+ !Call the mesh_size subroutine/function
  CALL mesh_size(element,nod,nels,nn,nxe,nye)
+ 
  ndof=nod*nodof
+ !Incase the problem is axisymmetric
  IF(type_2d=='axisymmetric')nst=4
+ 
+ !Allocating the array sizes
  ALLOCATE(nf(nodof,nn),points(nip,ndim),g(ndof),g_coord(ndim,nn),fun(nod),&
    coord(nod,ndim),jac(ndim,ndim),g_num(nod,nels),der(ndim,nod),          &
    deriv(ndim,nod),bee(nst,ndof),km(ndof,ndof),eld(ndof),weights(nip),    &
