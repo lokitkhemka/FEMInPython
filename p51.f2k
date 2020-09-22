@@ -58,9 +58,12 @@ PROGRAM p51
    deriv(ndim,nod),bee(nst,ndof),km(ndof,ndof),eld(ndof),weights(nip),    &
    g_g(ndof,nels),prop(nprops,np_types),num(nod),x_coords(nxe+1),         &
    y_coords(nye+1),etype(nels),gc(ndim),dee(nst,nst),sigma(nst))
+ !Read prop matrix
  READ(10,*)prop 
- etype=1 
+ etype=1
+ !Read etype matrix
  IF(np_types>1)read(10,*)etype 
+ !Read x and y coordinates of the nodes
  READ(10,*)x_coords,y_coords
  nf=1 
  READ(10,*)nr,(k,nf(:,k),i=1,nr) 
